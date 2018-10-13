@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XiaLM.ConsoleTest", "XiaLM.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XiaLM.FormTest", "XiaLM.FormTest\XiaLM.FormTest.csproj", "{A5C5E7BF-A47E-4B16-9081-560F407B7ABF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmClient", "AlgorithmClient\AlgorithmClient.csproj", "{F3586282-CE92-49F1-B530-B2F6419837E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,12 +31,17 @@ Global
 		{A5C5E7BF-A47E-4B16-9081-560F407B7ABF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A5C5E7BF-A47E-4B16-9081-560F407B7ABF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A5C5E7BF-A47E-4B16-9081-560F407B7ABF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3586282-CE92-49F1-B530-B2F6419837E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3586282-CE92-49F1-B530-B2F6419837E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3586282-CE92-49F1-B530-B2F6419837E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3586282-CE92-49F1-B530-B2F6419837E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{54DC5EC9-58F9-4CA8-98D2-5B507456A5AC} = {78C5331C-FE5A-45D4-B94D-0092E32945F2}
+		{F3586282-CE92-49F1-B530-B2F6419837E1} = {78C5331C-FE5A-45D4-B94D-0092E32945F2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {56DF03AB-44B1-42B7-B46F-6D15D1D38447}
