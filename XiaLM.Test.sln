@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XiaLM.FormTest", "XiaLM.For
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmClient", "AlgorithmClient\AlgorithmClient.csproj", "{F3586282-CE92-49F1-B530-B2F6419837E1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XiaLM.WebTest", "XiALM.WebTest\XiaLM.WebTest.csproj", "{657A3DD9-DFD8-44D4-AAEA-D9331AADC18A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{F3586282-CE92-49F1-B530-B2F6419837E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3586282-CE92-49F1-B530-B2F6419837E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3586282-CE92-49F1-B530-B2F6419837E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{657A3DD9-DFD8-44D4-AAEA-D9331AADC18A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{657A3DD9-DFD8-44D4-AAEA-D9331AADC18A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{657A3DD9-DFD8-44D4-AAEA-D9331AADC18A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{657A3DD9-DFD8-44D4-AAEA-D9331AADC18A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
