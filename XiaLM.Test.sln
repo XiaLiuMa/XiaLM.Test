@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2042
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XiaLM.Test", "XiaLM.Test\XiaLM.Test.csproj", "{EE2D3E91-A4B3-45C6-A139-E60B2D09AFCD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE2D3E91-A4B3-45C6-A139-E60B2D09AFCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE2D3E91-A4B3-45C6-A139-E60B2D09AFCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE2D3E91-A4B3-45C6-A139-E60B2D09AFCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE2D3E91-A4B3-45C6-A139-E60B2D09AFCD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {56DF03AB-44B1-42B7-B46F-6D15D1D38447}
+	EndGlobalSection
+EndGlobal
