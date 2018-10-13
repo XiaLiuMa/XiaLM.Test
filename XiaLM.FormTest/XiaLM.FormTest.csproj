@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NAudio, Version=1.8.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.8.4\lib\net35\NAudio.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +49,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\XiaLM.AI\XiaLM.MicrosoftSpeech\bin\Debug\XiaLM.MicrosoftSpeech.dll</HintPath>
     </Reference>
+    <Reference Include="XiaLM.Tool450">
+      <HintPath>..\..\XiaLM.Utility\XiaLM.Tool450\bin\Debug\XiaLM.Tool450.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainForm.cs">
@@ -60,6 +66,11 @@
     <Compile Include="MicrosoftSpeech\MainForm.designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Naudio待校验\Control\AudioFileReader.cs" />
+    <Compile Include="Naudio待校验\Control\SampleChannel.cs" />
+    <Compile Include="Naudio待校验\Control\WaveProvider.cs" />
+    <Compile Include="Naudio待校验\EventArgs\StreamVolumeEventArgs.cs" />
+    <Compile Include="Naudio待校验\Naudio.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="MicrosoftSpeech\MainForm.resx">
@@ -74,6 +85,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -87,5 +99,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
