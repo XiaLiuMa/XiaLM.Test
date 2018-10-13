@@ -1,0 +1,32 @@
+﻿@{Layout = null;}
+@using TestWebApp.Models
+@model EmployeeListView
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MyHome</title>
+</head>
+<body>
+    Hello @Model.UserName
+    <hr />
+    <div>
+        <table>
+            <tr>
+                <th>EmployeeName</th>
+                <th>Salary</th>
+            </tr>
+
+            @foreach (EmployeeView item in Model.Employees)
+            {
+                <tr>
+                <td> @item.EmployeeName </td>
+                <td style = "background-color:@item.SalaryColor"> @item.Salary </td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</body>
+</html>
