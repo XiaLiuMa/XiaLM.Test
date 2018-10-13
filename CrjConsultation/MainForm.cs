@@ -1,5 +1,4 @@
 ﻿using CrjConsultation.AIUI;
-using CrjConsultation.Help;
 using CrjConsultation.Model;
 using CrjConsultation.UserControl;
 using NAudio.Wave;
@@ -13,6 +12,7 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using XiaLM.Tool450.source.common;
 
 namespace CrjConsultation
 {
@@ -276,7 +276,7 @@ namespace CrjConsultation
                 float[] rateArray = new float[qpList.Count];
                 for (int i = 0; i < qpList.Count; i++)
                 {
-                    StringCompute stringcompute1 = new StringCompute();
+                    StrSimilarityHelper stringcompute1 = new StrSimilarityHelper();
                     stringcompute1.SpeedyCompute(txt, qpList[i].Text);
                     rateArray[i] = (float)stringcompute1.ComputeResult.Rate;
                 }

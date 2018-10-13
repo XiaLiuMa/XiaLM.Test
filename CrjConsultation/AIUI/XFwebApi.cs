@@ -1,5 +1,4 @@
 ﻿using CrjConsultation.AIUI.Model;
-using CrjConsultation.Help;
 using System;
 using System.Net.Http;
 using System.Web;
@@ -55,10 +54,10 @@ namespace CrjConsultation.AIUI
                     engine_type = "sms16k",
                     aue = "raw"
                 };
-                var iatJson = EncrypHelp.ToBase64(JsonSerializer.SerializeObject(iatParam));
-                var curTime = EncrypHelp.Get1970ToNowSeconds().ToString();
-                var checkSum = EncrypHelp.Md5Encryp(iatKey + curTime + iatJson);
-                var content = new StringContent("audio=" + HttpUtility.UrlEncode(EncrypHelp.ToBase64(bytes))); //数据
+                var iatJson = Base64Helper.ToBase64(SerializeHelper.SerializeObjectToJson(iatParam));
+                var curTime = EncryptHelper.Get1970ToNowSeconds().ToString();
+                var checkSum = EncryptHelper.Md5Encryp(iatKey + curTime + iatJson);
+                var content = new StringContent("audio=" + HttpUtility.UrlEncode(Base64Helper.ToBase64(bytes))); //数据
                 content.Headers.Add("X-Appid", appId);
                 content.Headers.Add("X-CurTime", curTime);
                 content.Headers.Add("X-Param", iatJson);
@@ -105,9 +104,9 @@ namespace CrjConsultation.AIUI
                     engine_type = "intp65",
                     text_type = "text"
                 };
-                var ttsJson = EncrypHelp.ToBase64(JsonSerializer.SerializeObject(ttsParam));
-                var curTime = EncrypHelp.Get1970ToNowSeconds().ToString();
-                var checkSum = EncrypHelp.Md5Encryp(ttsKey + curTime + ttsJson);
+                var ttsJson = Base64Helper.ToBase64(SerializeHelper.SerializeObjectToJson(ttsParam));
+                var curTime = EncryptHelper.Get1970ToNowSeconds().ToString();
+                var checkSum = EncryptHelper.Md5Encryp(ttsKey + curTime + ttsJson);
                 var content = new StringContent("text=" + HttpUtility.UrlEncode(txt));
                 content.Headers.Add("X-CurTime", curTime);
                 content.Headers.Add("X-Param", ttsJson);
@@ -127,7 +126,7 @@ namespace CrjConsultation.AIUI
                     {
                         //合成失败
                         var str = response.Content.ReadAsStringAsync().Result;
-                        var result = JsonSerializer.DeserializeObject<IatResult>(str);
+                        var result = SerializeHelper.SerializeJsonToObject<IatResult>(str);
                     }
                 }
             }
