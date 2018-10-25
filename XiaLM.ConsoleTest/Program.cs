@@ -1,4 +1,5 @@
 ﻿using System;
+using XiaLM.ConsoleTest.Dynamic;
 using XiaLM.Weather.source;
 
 namespace XiaLM.ConsoleTest
@@ -16,6 +17,10 @@ namespace XiaLM.ConsoleTest
                     WeatherHelper weatherHelper = new WeatherHelper("yzwniowtxrdeejan");
                     //var info = weatherHelper.GetWeather("武汉");
                     var info = weatherHelper.GetWeather("霍尔果斯");
+                }
+                if (txt.ToUpper().Equals("T"))
+                {
+                    new Tdynamic().Test();
                 }
             }
         }

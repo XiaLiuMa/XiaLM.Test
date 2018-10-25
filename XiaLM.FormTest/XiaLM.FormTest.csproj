@@ -54,6 +54,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CAN\CanForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CAN\CanForm.Designer.cs">
+      <DependentUpon>CanForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -73,6 +79,9 @@
     <Compile Include="Naudio待校验\Naudio.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CAN\CanForm.resx">
+      <DependentUpon>CanForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MicrosoftSpeech\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -99,6 +108,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\XiaLM.CAN\XiaLM.CAN.csproj">
+      <Project>{E32EF263-7356-4CB6-BD70-1F1818511EFC}</Project>
+      <Name>XiaLM.CAN</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
