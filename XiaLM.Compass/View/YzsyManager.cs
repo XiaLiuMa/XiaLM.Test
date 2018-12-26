@@ -18,6 +18,9 @@ namespace XiaLM.Compass.View
 {
     public partial class YzsyManager : Form
     {
+        private int currentIndex = 0; //当前页第一条的索引
+        private int totalNum = 0;   //总共多少页
+
         public YzsyManager()
         {
             InitializeComponent();
@@ -28,11 +31,12 @@ namespace XiaLM.Compass.View
             this.comboBox1.SelectedIndex = 0;
             this.comboBox2.SelectedIndex = 0;
             this.comboBox3.SelectedIndex = 0;
-            this.comboBox4.SelectedIndex = 1;
+            this.comboBox4.SelectedIndex = 0;
             this.comboBox1.SelectedIndexChanged += ComboBoxZ_SelectedIndexChanged;
             this.comboBox2.SelectedIndexChanged += ComboBoxZ_SelectedIndexChanged;
             this.comboBox3.SelectedIndexChanged += ComboBoxZ_SelectedIndexChanged;
-            RefreshYzsyList();
+            this.comboBox4.SelectedIndexChanged += ComboBox4_SelectedIndexChanged;
+            RefreshYzsyList(Convert.ToInt32(this.comboBox4.SelectedItem.ToString()), 0);
         }
 
         private void ComboBoxZ_SelectedIndexChanged(object sender, EventArgs e)
@@ -54,6 +58,16 @@ namespace XiaLM.Compass.View
                 this.textBox1.Text = string.Empty;
                 this.textBox2.Text = string.Empty;
             }
+        }
+
+        /// <summary>
+        /// 分页个数修改事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ComboBox4_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            RefreshYzsyList(Convert.ToInt32(this.comboBox4.SelectedItem.ToString()), currentIndex);
         }
 
         /// <summary>
@@ -87,17 +101,16 @@ namespace XiaLM.Compass.View
             bool flag = YzsyManament.GetInstance().ImportYzsy(importZ);
 
             MessageBox.Show($"插入结果：{flag}！");
-            RefreshYzsyList();
+            RefreshYzsyList(Convert.ToInt32(this.comboBox4.SelectedItem.ToString()), currentIndex);
         }
 
-
         /// <summary>
-        /// 刷新列表
+        /// 分页查询，刷新列表
         /// </summary>
-        private void RefreshYzsyList()
+        /// <param name="_limit">一页多少条</param>
+        /// <param name="_offset">从第几条开始查</param>
+        private void RefreshYzsyList(int _limit, int _offset)
         {
-            int _limit = Convert.ToInt32(this.comboBox4.SelectedItem.ToString());
-            int _offset = (Convert.ToInt32(this.textBox3.Text) - 1) * _limit;
             var obj = YzsyManament.GetInstance().SelectYzsysLimit(new BaseLimitParam() { limit = _limit, offset = _offset }) as YzsyLimitResult;
             if (obj != null)
             {
@@ -140,12 +153,47 @@ namespace XiaLM.Compass.View
                 this.dataGridView.Columns["_Update"].DataPropertyName = ds.Tables[0].Columns["_Update"].ToString();
                 this.dataGridView.Columns["_Delete"].DataPropertyName = ds.Tables[0].Columns["_Delete"].ToString();
 
+                int currentNum = (int)((_offset / _limit) + 1);
+                currentIndex = _offset;
+                totalNum = ((obj.totalCount % _limit) == 0) ? (int)(obj.totalCount / _limit) : (int)(obj.totalCount / _limit) + 1;
 
-                this.textBox3.Text = ((int)((obj.totalCount / _limit) + 0.5) + 1).ToString();    //当前是多少页
-                this.label14.Text = _offset.ToString();    //起始条数
+                this.textBox3.Text = currentNum.ToString();    //当前是多少页
+                this.label14.Text = (_offset + 1).ToString();    //起始条数
                 this.label16.Text = ((_offset + _limit) < obj.totalCount) ? (_offset + _limit).ToString() : obj.totalCount.ToString();    //结束条数
-                this.label9.Text = ((int)((obj.totalCount / _limit) + 0.5) + 1).ToString();     //共计多少页
+                this.label9.Text = totalNum.ToString();     //共计多少页
                 this.label12.Text = obj.totalCount.ToString();    //共计多少条
+
+                if (totalNum == 1)
+                {
+                    this.button2.Enabled = false;
+                    this.button3.Enabled = false;
+                    this.button4.Enabled = false;
+                    this.button5.Enabled = false;
+                }
+                else
+                {
+                    if (currentNum == 1)
+                    {
+                        this.button2.Enabled = false;
+                        this.button3.Enabled = false;
+                        this.button4.Enabled = true;
+                        this.button5.Enabled = true;
+                    }
+                    else if (currentNum > 1 && currentNum < totalNum)
+                    {
+                        this.button2.Enabled = true;
+                        this.button3.Enabled = true;
+                        this.button4.Enabled = true;
+                        this.button5.Enabled = true;
+                    }
+                    else if (currentNum == totalNum)
+                    {
+                        this.button2.Enabled = true;
+                        this.button3.Enabled = true;
+                        this.button4.Enabled = false;
+                        this.button5.Enabled = false;
+                    }
+                }
             }
             else
             {
@@ -155,9 +203,19 @@ namespace XiaLM.Compass.View
                 this.label16.Text = "0";
                 this.label9.Text = "0";
                 this.label12.Text = "0";
+
+                this.button2.Enabled = false;
+                this.button3.Enabled = false;
+                this.button4.Enabled = false;
+                this.button5.Enabled = false;
             }
         }
 
+        /// <summary>
+        /// 数据区点击事件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             string action = dataGridView.Columns[e.ColumnIndex].Name; //操作类型
@@ -185,7 +243,7 @@ namespace XiaLM.Compass.View
                     else
                     {
                         MessageBox.Show($"修改结果：成功{baseResult.SuccessNum}个，总共{baseResult.TotalNum}个！");
-                        RefreshYzsyList();
+                        RefreshYzsyList(Convert.ToInt32(this.comboBox4.SelectedItem.ToString()), currentIndex);
                     }
                 }
             }
@@ -203,7 +261,7 @@ namespace XiaLM.Compass.View
                     else
                     {
                         MessageBox.Show($"删除结果：成功{baseResult.SuccessNum}个，总共{baseResult.TotalNum}个！");
-                        RefreshYzsyList();
+                        RefreshYzsyList(Convert.ToInt32(this.comboBox4.SelectedItem.ToString()), currentIndex);
                     }
                 }
             }
@@ -216,7 +274,7 @@ namespace XiaLM.Compass.View
         /// <param name="e"></param>
         private void button2_Click(object sender, EventArgs e)
         {
-
+            RefreshYzsyList(Convert.ToInt32(this.comboBox4.SelectedItem.ToString()), 0);
         }
 
         /// <summary>
@@ -226,7 +284,8 @@ namespace XiaLM.Compass.View
         /// <param name="e"></param>
         private void button3_Click(object sender, EventArgs e)
         {
-
+            int startNum = currentIndex - Convert.ToInt32(this.comboBox4.SelectedItem.ToString());
+            RefreshYzsyList(Convert.ToInt32(this.comboBox4.SelectedItem.ToString()), startNum);
         }
 
         /// <summary>
@@ -236,7 +295,8 @@ namespace XiaLM.Compass.View
         /// <param name="e"></param>
         private void button4_Click(object sender, EventArgs e)
         {
-
+            int startNum = currentIndex + Convert.ToInt32(this.comboBox4.SelectedItem.ToString());
+            RefreshYzsyList(Convert.ToInt32(this.comboBox4.SelectedItem.ToString()), startNum);
         }
 
         /// <summary>
@@ -246,7 +306,8 @@ namespace XiaLM.Compass.View
         /// <param name="e"></param>
         private void button5_Click(object sender, EventArgs e)
         {
-
+            int startNum = (totalNum - 1) * Convert.ToInt32(this.comboBox4.SelectedItem.ToString());
+            RefreshYzsyList(Convert.ToInt32(this.comboBox4.SelectedItem.ToString()), startNum);
         }
 
         /// <summary>
@@ -288,8 +349,33 @@ namespace XiaLM.Compass.View
                         }
                         lines.RemoveRange(0, 9);
                     }
-                    RefreshYzsyList();
+                    RefreshYzsyList(Convert.ToInt32(this.comboBox4.SelectedItem.ToString()), 0);
                 }
+            }
+        }
+
+        /// <summary>
+        /// 删除当前页
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button7_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        /// <summary>
+        /// 清空所有
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void button8_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("确定清空所有数据吗?", "清空提示", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                bool flag = YzsyManament.GetInstance().ClearYzsys();
+                MessageBox.Show($"清空结果：{flag}");
+                RefreshYzsyList(Convert.ToInt32(this.comboBox4.SelectedItem.ToString()), 0);
             }
         }
     }

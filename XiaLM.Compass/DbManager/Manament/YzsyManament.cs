@@ -181,6 +181,30 @@ namespace XiaLM.Compass.DbManager.Manament
         }
 
         /// <summary>
+        /// 清空数据
+        /// </summary>
+        /// <returns></returns>
+        public bool ClearYzsys()
+        {
+            using (CompassDbContext dbContext = new CompassDbContext())
+            {
+                try
+                {
+                    var obj = dbContext.Yzsys.ToList();
+                    dbContext.Yzsys.RemoveRange(obj);
+                    var n = dbContext.SaveChanges();
+                    if (n >= 0) return true;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"清空YZSY失败，{ex.ToString()}");
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// 修改数据
         /// </summary>
         /// <param name="updateStr"></param>
