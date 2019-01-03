@@ -1,8 +1,8 @@
 ﻿using AlgorithmClient.Model;
+using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Text;
-using XiaLM.Tool450.source.common;
 
 namespace AlgorithmClient
 {
@@ -142,7 +142,7 @@ namespace AlgorithmClient
             try
             {
                 string josnStr = Encoding.UTF8.GetString(msg);
-                TempSelectFaceInfo tempObj = SerializeHelper.SerializeJsonToObject<TempSelectFaceInfo>(josnStr);
+                TempSelectFaceInfo tempObj = JsonConvert.DeserializeObject<TempSelectFaceInfo>(josnStr);
                 MainForm.GetInstance().Invoke(new Action(() =>
                 {
                     if (tempObj == null)

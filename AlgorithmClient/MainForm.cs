@@ -1,4 +1,5 @@
 ﻿using AlgorithmClient.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -7,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using TcpAlgorithmClient;
-using XiaLM.Tool450.source.common;
 
 namespace AlgorithmClient
 {
@@ -198,7 +198,7 @@ namespace AlgorithmClient
                 type = tempList[num].type,
                 serialnumber = tempList[num].serialnumber
             };
-            string jsonStr = SerializeHelper.SerializeObjectToJson(deleteFaceInfo);
+            string jsonStr = JsonConvert.SerializeObject(deleteFaceInfo);
             byte[] bytes = Encoding.UTF8.GetBytes(jsonStr);
             RobotClientControl.GetInstance().SendMsg(CODE_DELETE, bytes);
         }
@@ -213,7 +213,7 @@ namespace AlgorithmClient
                 type = tempList[num].type,
                 serialnumber = tempList[num].serialnumber
             };
-            string jsonStr = SerializeHelper.SerializeObjectToJson(deleteFaceInfo);
+            string jsonStr = JsonConvert.SerializeObject(deleteFaceInfo);
             byte[] bytes = Encoding.UTF8.GetBytes(jsonStr);
             RobotClientControl.GetInstance().SendMsg(CODE_DELETE, bytes);
         }
@@ -253,7 +253,7 @@ namespace AlgorithmClient
                 filename = Path.GetFileName(this.tBoxFilename.Text.Trim()),
                 imagebytes = base64txt
             };
-            string jsonStr = SerializeHelper.SerializeObjectToJson(uploadFaceInfo);
+            string jsonStr = JsonConvert.SerializeObject(uploadFaceInfo);
             byte[] bytes = Encoding.UTF8.GetBytes(jsonStr);
             RobotClientControl.GetInstance().SendMsg(CODE_UPDATE, bytes);
         }
@@ -283,7 +283,7 @@ namespace AlgorithmClient
                 X2 = 200,
                 Y2 = 200
             };
-            string jsonStr = SerializeHelper.SerializeObjectToJson(pedestriansConfig);
+            string jsonStr = JsonConvert.SerializeObject(pedestriansConfig);
             byte[] bytes = Encoding.UTF8.GetBytes(jsonStr);
             RobotClientControl.GetInstance().SendMsg(CODE_UPDATECONFIG, bytes);
         }

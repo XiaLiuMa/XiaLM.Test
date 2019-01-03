@@ -1,7 +1,7 @@
 ﻿using AlgorithmClient.Model;
+using Newtonsoft.Json;
 using System;
 using System.Text;
-using XiaLM.Tool450.source.common;
 
 
 /*
@@ -129,7 +129,7 @@ namespace AlgorithmClient
                         break;
                     case CODE_ISSUEALARM: //下发行人报警
                         var tempStr1 = Encoding.UTF8.GetString(data);
-                        PedestriansAlarm obj1 = SerializeHelper.SerializeJsonToObject<PedestriansAlarm>(tempStr1);
+                        PedestriansAlarm obj1 = JsonConvert.DeserializeObject<PedestriansAlarm>(tempStr1);
                         if (obj1 != null)
                             WriteLogRealize.GetInstance().WriteTo_rTxtLog(string.Format("机器人{0}发现X1:{1},Y1:{2},X2:{3},Y2:{4}处，有人{5}",obj1.Robotnumber,obj1.X1,obj1.Y1,obj1.X2,obj1.Y2,obj1.type));
                         WriteLogRealize.GetInstance().WriteTo_rTxtCode(false, code, data);
@@ -150,7 +150,7 @@ namespace AlgorithmClient
                         break;
                     case CODE_ALARM:
                         var tempStr = Encoding.UTF8.GetString(data);
-                        AlarmFaceInfo obj = SerializeHelper.SerializeJsonToObject<AlarmFaceInfo>(tempStr);
+                        AlarmFaceInfo obj = JsonConvert.DeserializeObject<AlarmFaceInfo>(tempStr);
                         if (obj != null)
                             WriteLogRealize.GetInstance().WriteTo_rTxtLog(string.Format("机器人{0}发现{1}名单，人员编号为{2}", obj.robotnumber, obj.type, obj.serialnumber));
                         WriteLogRealize.GetInstance().WriteTo_rTxtCode(false, code, data);
